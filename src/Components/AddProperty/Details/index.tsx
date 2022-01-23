@@ -1,12 +1,13 @@
 import React from 'react';
 import { toast } from 'react-toastify';
+// @logic
+import { useStore } from 'logic/store';
+import { TRole } from 'logic/store/stores/users.store';
 // @form
-import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-// @logic
-import { TRole } from 'logic/store/stores/users.store';
-import { useStore } from 'logic/store';
+import { useForm, Controller } from 'react-hook-form';
+import PropertyHeader from 'Components/utils/PropertyHeader';
 
 interface IFormData {
   password: string;
@@ -27,9 +28,8 @@ const schema = yup
   })
   .required();
 
-const Profile = () => {
+const AddProperty = () => {
   const store = useStore();
-
   const { userId } = store.auth as { userId: number };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,6 +39,10 @@ const Profile = () => {
 
   const user = userId ? store.users.getById(userId) : null;
   console.log('user', user);
+
+  const { handleSubmit, control, reset } = useForm<IFormData>({
+    resolver: yupResolver(schema)
+  });
 
   const updateProfile = async ({
     email,
@@ -64,22 +68,10 @@ const Profile = () => {
     }
   };
 
-  React.useEffect(() => {
-    if (user) {
-      reset(user);
-    }
-  }, [JSON.stringify(user)]);
-
-  React.useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
-
-  const { handleSubmit, control, reset } = useForm<IFormData>({
-    resolver: yupResolver(schema)
-  });
-
+  // TODO: add form validations here
   return (
     <div>
+      <PropertyHeader heading="Add Property" />
       <main className="profile-page">
         <section className="relative block" style={{ height: '500px' }}>
           <div
@@ -124,7 +116,7 @@ const Profile = () => {
                       {/* TODO get image from source */}
                       <img
                         alt="..."
-                        src={require('images/team-2-800x800.jpg').default}
+                        src={require('images/team-2-800x800.jpg')}
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
                         style={{ maxWidth: '150px' }}
                       />
@@ -328,4 +320,5 @@ const Profile = () => {
     </div>
   );
 };
-export default Profile;
+
+export default AddProperty;
