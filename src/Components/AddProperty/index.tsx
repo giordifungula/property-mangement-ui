@@ -175,7 +175,14 @@ const AddPropertyForm = () => {
       case FormSteps.Additional:
         return <FormB formB={formB} updateFormB={updateFormB} />;
       case FormSteps.StatusAndType:
-        return <FormC formC={formC} updateFormC={updateFormC} />;
+        return (
+          <FormC
+            formC={formC}
+            formA={formA}
+            formB={formB}
+            updateFormC={updateFormC}
+          />
+        );
       default:
     }
   };
