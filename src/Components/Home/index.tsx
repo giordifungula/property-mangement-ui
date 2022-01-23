@@ -1,5 +1,5 @@
-import { TPropertyTypes } from 'logic/store/stores/properties.store';
 import React from 'react';
+import { TPropertyTypes } from 'logic/store/stores/properties.store';
 import { Link } from 'react-router-dom';
 // @forms
 import { useForm, Controller } from 'react-hook-form';

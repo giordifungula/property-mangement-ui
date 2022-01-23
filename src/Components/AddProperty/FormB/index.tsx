@@ -7,7 +7,7 @@ import { IFormB } from '..';
 
 interface IFormAProp {
   formB: IFormB;
-  updateFormB: (formA: IFormB) => void;
+  updateFormB: (formB: IFormB) => void;
 }
 
 interface IFormData {
@@ -28,9 +28,9 @@ const schema = yup
   .required();
 
 const FormB = ({ formB, updateFormB }: IFormAProp) => {
-  const handleNext = () => {
-    console.log('handle next');
-    // todo cross check this
+  const saveFormDetails = (data: IFormData) => {
+    console.log('data', data);
+    updateFormB(data);
   };
 
   const {
@@ -41,7 +41,8 @@ const FormB = ({ formB, updateFormB }: IFormAProp) => {
   } = useForm<IFormData>({
     resolver: yupResolver(schema)
   });
-  console.log('errors', errors);
+
+  console.log('errorrs', errors);
 
   const bedroomError = errors.bedrooms ? errors.bedrooms.message : '';
   const bathroomError = errors.bathrooms ? errors.bathrooms.message : '';
@@ -49,8 +50,7 @@ const FormB = ({ formB, updateFormB }: IFormAProp) => {
   const lotSizeError = errors.lotSize ? errors.lotSize.message : '';
 
   return (
-    <form onSubmit={handleSubmit(updateFormB)}>
-      {/* TODO add Controller here to update details */}
+    <form onSubmit={handleSubmit(saveFormDetails)}>
       <div className="relative w-full mb-3">
         <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
           Bedrooms
@@ -68,7 +68,7 @@ const FormB = ({ formB, updateFormB }: IFormAProp) => {
                   ? 'border-red-500 input-error '
                   : ''
               }`}
-              placeholder="Property Name"
+              placeholder="Bedrooms"
               style={{ transition: 'all .15s ease' }}
             />
           )}
@@ -94,7 +94,7 @@ const FormB = ({ formB, updateFormB }: IFormAProp) => {
                   ? 'border-red-500 input-error '
                   : ''
               }`}
-              placeholder="Address"
+              placeholder="Bathrooms"
               style={{ transition: 'all .15s ease' }}
             />
           )}
@@ -123,7 +123,7 @@ const FormB = ({ formB, updateFormB }: IFormAProp) => {
                   ? 'border-red-500 input-error '
                   : ''
               }`}
-              placeholder="City"
+              placeholder="Sqft"
               style={{ transition: 'all .15s ease' }}
             />
           )}
@@ -165,9 +165,8 @@ const FormB = ({ formB, updateFormB }: IFormAProp) => {
           className="bg-gray-900 w-1/6 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
           style={{ transition: 'all .15s ease' }}
           type="submit"
-          // onClick={handleNext}
         >
-          Proceed
+          Next
         </button>
       </div>
     </form>

@@ -96,7 +96,8 @@ const FormC = ({ formC, updateFormC }: IFormAProp) => {
         </label>
         <Controller
           name="type"
-          defaultValue="regular"
+          defaultValue="apartment"
+          control={control}
           render={(props) => (
             <select
               className="select block select-bordered w-full"
@@ -118,8 +119,9 @@ const FormC = ({ formC, updateFormC }: IFormAProp) => {
           Occupancy Type
         </label>
         <Controller
-          name="type"
-          defaultValue="regular"
+          name="occupancyType"
+          defaultValue="rent"
+          control={control}
           render={(props) => (
             <select
               className="select block select-bordered w-full"
@@ -139,7 +141,6 @@ const FormC = ({ formC, updateFormC }: IFormAProp) => {
           className="bg-gray-900 w-1/6 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
           style={{ transition: 'all .15s ease' }}
           type="submit"
-          // onClick={handleNext}
         >
           Proceed
         </button>

@@ -31,7 +31,7 @@ const schema = yup
   })
   .required();
 
-const FormA = ({ formA }: IFormAProp) => {
+const FormA = ({ formA, updateFormA }: IFormAProp) => {
   const handleNext = () => {
     console.log('handle next');
     // todo cross check this
@@ -45,7 +45,6 @@ const FormA = ({ formA }: IFormAProp) => {
   } = useForm<IFormData>({
     resolver: yupResolver(schema)
   });
-  console.log('errors', errors);
 
   const nameError = errors.name ? errors.name.message : '';
   const addressError = errors.address ? errors.address.message : '';
@@ -54,9 +53,12 @@ const FormA = ({ formA }: IFormAProp) => {
   const zipError = errors.zip ? errors.zip.message : '';
   const priceError = errors.price ? errors.price.message : '';
 
+  const saveFormDetails = (data: IFormData) => {
+    updateFormA(data);
+  };
+
   return (
-    <form onSubmit={handleSubmit(handleNext)}>
-      {/* TODO add Controller here to update details */}
+    <form onSubmit={handleSubmit(saveFormDetails)}>
       <div className="relative w-full mb-3">
         <label className="block uppercase text-gray-700 text-xs font-bold mb-2">
           Property Name
@@ -81,7 +83,9 @@ const FormA = ({ formA }: IFormAProp) => {
           )}
         />
         {nameError ? (
-          <span className="label-text-alt">Name is required</span>
+          <span className="label-text-alt border-red-500">
+            Name is required
+          </span>
         ) : null}
       </div>
       <div className="relative w-full mb-3">
@@ -190,7 +194,9 @@ const FormA = ({ formA }: IFormAProp) => {
           )}
         />
         {stateError ? (
-          <span className="label-text-alt">State is required</span>
+          <span className="label-text-alt input-error border-red-500">
+            State is required
+          </span>
         ) : null}
       </div>
 
@@ -224,9 +230,8 @@ const FormA = ({ formA }: IFormAProp) => {
           className="bg-gray-900 w-1/6 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
           style={{ transition: 'all .15s ease' }}
           type="submit"
-          // onClick={handleNext}
         >
-          Proceed
+          Next
         </button>
       </div>
     </form>

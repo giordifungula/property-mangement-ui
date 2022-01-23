@@ -49,7 +49,7 @@ export interface IFormA {
   address?: string;
   city?: string;
   state?: string;
-  zip?: string;
+  zip?: number;
   price?: number;
 }
 
@@ -66,30 +66,6 @@ export interface IFormC {
   type?: TPropertyTypes;
   occupancyType?: TPropertyOccupancyType;
 }
-
-const schema = yup
-  .object()
-  .shape({
-    name: yup.string().required(),
-    address: yup.string().required(),
-    city: yup.string().required(),
-    state: yup.string().required(),
-    zip: yup.number().required(),
-    price: yup.number().required(),
-    bedrooms: yup.number().required(),
-    bathrooms: yup.number().required(),
-    sqft: yup.number().required(),
-    lotSize: yup.number().required(),
-    yearBuilt: yup.number().required(),
-    status: yup.string().required().oneOf(['active', 'inactive', 'sold']),
-    type: yup
-      .string()
-      .required()
-      .oneOf(['house', 'villa', 'apartment', 'estate', 'flat']),
-    occupancyType: yup.string().required().oneOf(['rent', 'sale', 'rent_sale']),
-    userId: yup.number().required()
-  })
-  .required();
 
 const AddPropertyForm = () => {
   const store = useStore();
@@ -113,7 +89,7 @@ const AddPropertyForm = () => {
 
   const updateFormA = (data: IFormA) => {
     setFormA((state) => ({ ...state, ...data }));
-    // handleNext(data);
+    handleNext();
   };
 
   const [formB, setFormB] = React.useState<IFormB>({
@@ -125,6 +101,7 @@ const AddPropertyForm = () => {
 
   const updateFormB = (data: IFormB) => {
     setFormB((state) => ({ ...state, ...data }));
+    handleNext();
   };
 
   const [formC, setFormC] = React.useState<IFormC>({
@@ -136,11 +113,12 @@ const AddPropertyForm = () => {
 
   const updateFormC = (data: IFormC) => {
     setFormC((state) => ({ ...state, ...data }));
+    handleNext();
   };
 
-  // const handleNext = (data: IFormData) => {
-  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  // };
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
 
   // const handlePrevious = () => {
   //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -203,15 +181,14 @@ const AddPropertyForm = () => {
   };
 
   return (
-    <div>
+    <div className="mx-auto">
       <PropertyHeader heading="Add Property" />
-      <main className="profile-page">
+      <main className="w-full">
         <section className="relative block" style={{ height: '500px' }}>
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
             style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2710&q=80')"
+              backgroundImage: `url(${require('images/bigHouseBG.png')}`
             }}
           >
             <span
@@ -249,7 +226,7 @@ const AddPropertyForm = () => {
                       {/* TODO get image from source */}
                       <img
                         alt="..."
-                        src={require('images/team-2-800x800.jpg')}
+                        src={require('images/houseHut.png')}
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
                         style={{ maxWidth: '150px' }}
                       />
@@ -323,13 +300,10 @@ const AddPropertyForm = () => {
           Base Info
         </li>
         <li className={`step ${activeStep > 1 ? 'step-primary' : ' '} `}>
-          Uploads
+          Create Property
         </li>
         <li className={`step ${activeStep > 2 ? 'step-primary' : ' '} `}>
-          Register
-        </li>
-        <li className={`step ${activeStep > 3 ? 'step-primary' : ' '} `}>
-          Register
+          Uploads
         </li>
       </ul>
     </div>
