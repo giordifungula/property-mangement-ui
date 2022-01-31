@@ -29,7 +29,6 @@ const schema = yup
 
 const FormB = ({ formB, updateFormB }: IFormAProp) => {
   const saveFormDetails = (data: IFormData) => {
-    console.log('data', data);
     updateFormB(data);
   };
 
@@ -41,8 +40,6 @@ const FormB = ({ formB, updateFormB }: IFormAProp) => {
   } = useForm<IFormData>({
     resolver: yupResolver(schema)
   });
-
-  console.log('errorrs', errors);
 
   const bedroomError = errors.bedrooms ? errors.bedrooms.message : '';
   const bathroomError = errors.bathrooms ? errors.bathrooms.message : '';

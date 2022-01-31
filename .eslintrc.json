@@ -1,0 +1,97 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "prettier", "jest"],
+  "rules": {
+    "import/no-unresolved": "off",
+    "import/extensions": [
+      "off",
+      "ignorePackages",
+      {
+        "js": "never",
+        "ts": "never"
+      }
+    ],
+    "lines-between-class-members": "off",
+    "import/prefer-default-export": "off",
+    "prettier/prettier": ["error", { "singleQuote": true }],
+    "@typescript-eslint/explicit-member-accessibility": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/no-use-before-define": 0,
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/camelcase": 0,
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "semi": ["error", "always"],
+    "no-console": 1,
+    // note you must disable the base rule as it can report incorrect errors
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "no-underscore-dangle": 0,
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/no-empty-interface": [
+      "warn",
+      {
+        "allowSingleExtends": true
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "format": ["camelCase", "PascalCase", "UPPER_CASE"]
+      },
+      { "selector": "variableLike", "format": ["camelCase"] },
+      { "selector": "enumMember", "format": ["PascalCase"] },
+      {
+        "selector": "parameter",
+        "format": ["camelCase"],
+        "leadingUnderscore": "allow"
+      },
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase"],
+        "prefix": ["I"]
+      },
+      {
+        "selector": "typeAlias",
+        "format": ["PascalCase"],
+        "prefix": ["T"]
+      },
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "prefix": ["I", "ServiceTypes"]
+      },
+      {
+        "selector": "typeParameter",
+        "format": ["PascalCase"],
+        "prefix": ["T"]
+      },
+      {
+        "selector": "class",
+        "format": ["PascalCase"]
+      }
+    ]
+  },
+  "env": {},
+  "globals": {
+    "window": true,
+    "document": true,
+    "localStorage": true,
+    "FormData": true,
+    "FileReader": true,
+    "Blob": true,
+    "navigator": true
+  }
+}
