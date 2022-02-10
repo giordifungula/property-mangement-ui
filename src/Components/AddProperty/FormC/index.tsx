@@ -72,6 +72,7 @@ const FormC = observer(({ formC, formA, formB, updateFormC }: IFormProp) => {
 		console.log('payload', payload);
 		updateFormC(data);
 		// const res = await store.properties.create(payload);
+		// TODO ensure payload values are defined
 	};
 
 	return (
