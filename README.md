@@ -1,15 +1,20 @@
-# react-tailwinds-sample-ui
+# Property Mangement App Repo
 
-UI template for react template using Tailwinds
+Building an application that will allow users to login/sign and list properties for sale/rent.
+Users should be able to upload their listings and fill in their property details in a multi stepper form.
+Property Owners can upload images for each property as well.
+I would like regular users to either view the property and either contact the lister of the property, fake buy or rent the property by flagging it as an item of interest.
 
-## What is included in this template
+## What will be included inside the Project
 
 - Auth pages (Login, Signup)
 - Profile Page
 - Landing Page
 - Navigation Bar
 - Footer
-- Components that are ready to be extended.
+- Property Listing Page
+- Create Property Page
+- Additional Components that I will add to repo.
 
 ## Tools used to build this
 
@@ -19,4 +24,4 @@ UI template for react template using Tailwinds
 - React Router
 - Mobx
 - Context
-- Feathers
+- Feathers/Super base 
