@@ -9,7 +9,7 @@
 		"plugin:@typescript-eslint/recommended",
 		"plugin:prettier/recommended"
 	],
-	"plugins": ["@typescript-eslint", "prettier", "jest"],
+	"plugins": ["@typescript-eslint", "prettier", "jest", "react-hooks"],
 	"rules": {
 		"import/no-unresolved": "off",
 		"import/extensions": [

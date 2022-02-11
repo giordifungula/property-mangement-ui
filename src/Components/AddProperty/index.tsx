@@ -1,18 +1,16 @@
 import React from 'react';
+import { observer } from 'mobx-react-lite';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import PropertyHeader from 'Components/utils/PropertyHeader';
 // @logic
 import {
-	IPropertyWrite,
 	TPropertyOccupancyType,
-	TPropertyStatuses,
 	TPropertyTypes,
 } from 'logic/store/stores/properties.store';
 import { useStore } from 'logic/store';
 // @local
-import AddProperty from './Details';
 import FormA from './FormA';
 import FormB from './FormB';
 import FormC from './FormC';
@@ -64,7 +62,7 @@ export interface IFormC {
 	occupancyType?: TPropertyOccupancyType;
 }
 
-const AddPropertyForm = () => {
+const AddPropertyForm = observer(() => {
 	const store = useStore();
 	const { userId } = store.auth as { userId: number };
 
@@ -278,6 +276,6 @@ const AddPropertyForm = () => {
 			</ul>
 		</div>
 	);
-};
+});
 
 export default AddPropertyForm;
