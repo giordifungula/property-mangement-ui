@@ -2,18 +2,17 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useForm, Controller } from 'react-hook-form';
 import PropertyHeader from 'Components/utils/PropertyHeader';
-import { TRole } from 'logic/store/stores/users.store';
-import { useStore } from 'logic/store';
-// @local
-import AddProperty from './Details';
+// @logic
 import {
 	IPropertyWrite,
 	TPropertyOccupancyType,
 	TPropertyStatuses,
 	TPropertyTypes,
 } from 'logic/store/stores/properties.store';
+import { useStore } from 'logic/store';
+// @local
+import AddProperty from './Details';
 import FormA from './FormA';
 import FormB from './FormB';
 import FormC from './FormC';
@@ -25,12 +24,12 @@ enum IFormSteps {
 	Photos,
 }
 
-interface IFormData {
+export interface IEntireFormFilledInState {
 	name: string;
 	address: string;
 	city: string;
 	state: string;
-	zip: string;
+	zip: number;
 	price: number;
 	bedrooms: number;
 	bathrooms: number;
@@ -112,8 +111,6 @@ const AddPropertyForm = () => {
 		handleNext();
 	};
 
-	console.log('formC outside', formC);
-
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
 	};
@@ -122,60 +119,15 @@ const AddPropertyForm = () => {
 	//   setActiveStep((prevActiveStep) => prevActiveStep - 1);
 	// };
 
-	// const createProperty = async ({
-	//   name,
-	//   address,
-	//   city,
-	//   state,
-	//   zip,
-	//   price,
-	//   bedrooms,
-	//   bathrooms,
-	//   sqft,
-	//   lotSize,
-	//   yearBuilt,
-	//   status,
-	//   type,
-	//   occupancyType,
-	//   userId
-	// }: IFormData) => {
-	//   try {
-	//     const payload = {
-	//       name,
-	//       address,
-	//       city,
-	//       state,
-	//       zip,
-	//       price,
-	//       bedrooms,
-	//       bathrooms,
-	//       sqft,
-	//       lotSize,
-	//       yearBuilt,
-	//       status,
-	//       type,
-	//       occupancyType,
-	//       userId
-	//     };
-	//     const res = await store.properties.create(payload);
-	//     console.log('res', res);
-	//     toast.success('Property created successfully');
-	//     reset();
-	//   } catch (error) {
-	//     toast.error('error');
-	//   }
-	// };
-
 	const getStepContent = (step: IFormSteps) => {
 		switch (step) {
 			case IFormSteps.BasicInfo:
 				return <FormA formA={formA} updateFormA={updateFormA} />;
 			case IFormSteps.Additional:
-				return <FormB formB={formB} updateFormB={updateFormB} />;
+				return <FormB updateFormB={updateFormB} />;
 			case IFormSteps.StatusAndType:
 				return (
 					<FormC
-						formC={formC}
 						formA={formA}
 						formB={formB}
 						updateFormC={updateFormC}
