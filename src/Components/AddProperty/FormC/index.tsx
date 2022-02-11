@@ -12,9 +12,10 @@ import {
 	TPropertyOccupancyType,
 } from 'logic/store/stores/properties.store';
 import { useStore } from 'logic/store';
+// @local
+import { IEntireFormFilledInState } from '../';
 
 interface IFormProp {
-	formC: IFormC;
 	formA: IFormA;
 	formB: IFormB;
 	updateFormC: (formC: IFormC) => void;
@@ -41,12 +42,7 @@ const schema = yup
 	})
 	.required();
 
-const FormC = observer(({ formC, formA, formB, updateFormC }: IFormProp) => {
-	const handleNext = () => {
-		console.log('handle next');
-		// todo cross check this
-	};
-
+const FormC = observer(({ formA, formB, updateFormC }: IFormProp) => {
 	const store = useStore();
 	const { userId } = store.auth as { userId: number };
 
@@ -68,10 +64,17 @@ const FormC = observer(({ formC, formA, formB, updateFormC }: IFormProp) => {
 	const createProperty = async (data: IFormData) => {
 		// TODO status should be set by default
 
-		const payload = { ...data, ...formA, ...formB };
+		const payload = {
+			...data,
+			...formA,
+			...formB,
+			userId,
+			status: 'inactive',
+		} as IEntireFormFilledInState;
 		console.log('payload', payload);
 		updateFormC(data);
-		// const res = await store.properties.create(payload);
+		const res = await store.properties.create(payload);
+		console.log('res', res);
 		// TODO ensure payload values are defined
 	};
 
@@ -159,7 +162,7 @@ const FormC = observer(({ formC, formA, formB, updateFormC }: IFormProp) => {
 
 			<div className="text-center mt-6">
 				<button
-					className="bg-gray-900 w-1/6 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+					className="bg-gray-900 w-1/6 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 "
 					style={{ transition: 'all .15s ease' }}
 					type="submit"
 				>
