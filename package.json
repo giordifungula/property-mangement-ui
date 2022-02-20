@@ -17,6 +17,7 @@
     "@types/react-dom": "^17.0.11",
     "axios": "^0.24.0",
     "daisyui": "^1.22.2",
+    "eslint-plugin-react-hooks": "^4.2.1-rc.0-next-64223fed8-20220210",
     "framer-motion": "^5.6.0",
     "mobx": "^6.3.12",
     "mobx-react-lite": "^3.2.3",
@@ -54,7 +55,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
-		"prettier": "^2.3.2"
+    "prettier": "^2.3.2"
   },
   "scripts": {
     "start": "craco start",

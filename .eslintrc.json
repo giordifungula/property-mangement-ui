@@ -9,8 +9,9 @@
 		"plugin:@typescript-eslint/recommended",
 		"plugin:prettier/recommended"
 	],
-	"plugins": ["@typescript-eslint", "prettier", "jest", "react-hooks"],
+	"plugnis": ["@typescript-eslint", "prettier", "jest", "react-hooks"],
 	"rules": {
+		"react-hooks/exhaustive-deps": "error",
 		"import/no-unresolved": "off",
 		"import/extensions": [
 			"off",
@@ -93,5 +94,10 @@
 		"FileReader": true,
 		"Blob": true,
 		"navigator": true
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
 	}
 }
